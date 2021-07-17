@@ -10,14 +10,6 @@ USEFUL RESOURCES:
 #include <string.h>
 #include <stdlib.h>
 
-
-//Linked List Exercise
-struct Node {
-   int head; // Data is simply an integer
-   struct Node* tail; // The tail of the element is a pointer to the next element in the list
-};
-
-
 void printSizeOfDataTypes()
 {
 
@@ -100,19 +92,46 @@ const char* reverse(char* string)
 }
 
 
+int fib(int num) //0, 1, 1, 2, 3, 5, 8,...
+{
+   if (num == 0) return 0;
+   if (num == 1) return 1;
+   else return fib(num-1) + fib(num-2);
+}
+
+//For each element: Scan all elements; if any element is bigger than the element, swap them.
+void bubblesort(int list[], int amountOfNumbers)
+{ //2, 5, 1, 3
+   int temp;
+   int size = amountOfNumbers;
+   for (int i = 0; i < size; i++)
+   {
+      for (int j = 0; j < size; j++)
+      {
+         if (list[i] < list[j])
+         {
+            temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+         }
+      }
+   }
+   for (int i = 0; i < size; i++) printf("%d, ", list[i]);
+
+}
+
+
 int main() {
-   // Since we must refer to these elements as tails, each element must be a pointer to a struct
-   //struct Node* first = {NULL};
-   //struct Node* second = {NULL};
 
    //printf("Hello world\n");
-
    //userInputStuff();
    //positiveNumberStuff();
-   printf("\nReverse of 'Hello': %s", reverse("Hello"));
+   //printf("\nReverse of 'Hello': %s\n", reverse("Hello"));
    //printSizeOfDataTypes();
    //printf("String was: %c", reverse("hello"));
-
+   //printf("Fib: %d", fib(8));
+   int array[] = {2, 1, 5, 6, 12, 762, 3, 2};
+   bubblesort(array, 8);
 }
 
  
