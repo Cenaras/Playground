@@ -7,6 +7,8 @@ USEFUL RESOURCES:
 
 #include <stdio.h>
 #include <stdbool.h> //Importing booleans. 0 = false, else is true
+#include <string.h>
+#include <stdlib.h>
 
 
 //Linked List Exercise
@@ -75,17 +77,26 @@ Since strings are arrays of chars, we return a pointer to the first char...
 */
 const char* reverse(char* string)
 {
-   int size = sizeof(string);
-   char* rev[sizeof(string)];
+   // [a][b][c] -> [c][b][a]
+   int size = strlen(string);   
+   char *rev = malloc(size*sizeof(char)); //Allocate a string (subsequent memory) with size equal to "length of input * size of a single char"
+   printf("Size of the string: %d\n", size);
    
-   printf("Size of the string: %d", size);
-   
-   /*for (int i = 0; i < size ; i++)
+   for (int i = 0; i < size ; i++)
    {
-      rev[i] = string[size - i];
+      rev[i] = string[size - i - 1];
+      //printf("%c", *(rev+i)); Prints out the message. Note that rev[i] is the same as dereferencing the the pointer at index: *(rev + i)
    }
+   
+   /*Brief explanation: 
+      A look at memory: ...[][][H][e][l][l][o][][]...
+      We get pointer to [H] from input - Char* is a pointer to the address of [H]
+      We then create an array of the appopiate size: rev: [][][][][]. 
+      We let rev* be a pointer, pointing to the first input here.
+      Then we fill this in and lastly we return it
+
    */
-   return "Fix this";
+   return rev;
 }
 
 
@@ -98,8 +109,8 @@ int main() {
 
    //userInputStuff();
    //positiveNumberStuff();
-   //reverse("Hellof");
-   printSizeOfDataTypes();
+   printf("\nReverse of 'Hello': %s", reverse("Hello"));
+   //printSizeOfDataTypes();
    //printf("String was: %c", reverse("hello"));
 
 }
