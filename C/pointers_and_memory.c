@@ -46,11 +46,48 @@ void funWithMemoryAndArrays()
         
         Always remember this: Arrays have their last index in the highest memory, and &var retrieves the location of the first element in the array
     */
-
 }
+
+void pointersAndMemoryBasics()
+{
+    /*
+    Notation used:
+     - A value is what is stored in variables
+     - A pointer is the memory address of a value
+
+     - &: Takes a value and turns it into a pointer (val -> mem loc)
+     - *: Takes a pointer and turns into a value (mem loc -> val)
+
+    int *p is a pointer to where p is stored in memory, i.e. it is a memory location
+    int v = &p takes this memory location, and reads the value stored in it, and assigns this value to v
+
+    */
+ 
+    int v = 2; //The value
+    int *p = &v; //The memory location, where v lives
+
+    printf("The pointer, pointing to v: %x\nAdding to the value does not change the pointer:\n", p);
+    v++;
+    printf("After adding 1 to the value: %x\n", p);
+
+
+    int a[5] = {0, 1, 2, 3, 4};
+
+    /*
+        Arrays are very much like pointers. Using the * operator we can access the values of them.
+        *a is the first element in the array, *(a+1) is the second element. Notice this, since C implicitly calculates a+1 as 4 bytes after a
+        Hence: a+1 is 4 bytes after a, and therefore *(a+1) is the next integer element in a.
+        Instead of writing *(a+n) we can write a[n], but this is syntactic sugar for: Jump n times the size of the data type in memory from the start of the array,
+            and retrieve the value in there.
+    */
+    printf("a, a+1 and a+2: %x, %x, %x\n", a, a+1, a+2);
+    printf("a, *(a+1): %d, %d\n", *a, *(a+1));
+}
+
 
 int main()
 {
-    funWithMemoryAndArrays();
+    //funWithMemoryAndArrays();
+    pointersAndMemoryBasics();
     return 0;
 }
