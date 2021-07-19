@@ -46,6 +46,10 @@ void funWithMemoryAndArrays()
         
         Always remember this: Arrays have their last index in the highest memory, and &var retrieves the location of the first element in the array
     */
+
+printf("The location of var2+1: %x\n", var2+1); //Since var2 points to the beginning of the array, var2+1 points to the first index. Likewise var2[1] is referenced by *(var2 + 1)
+//Again we see, that pointers and arrays are very much alike.
+
 }
 
 void pointersAndMemoryBasics()
@@ -82,12 +86,97 @@ void pointersAndMemoryBasics()
     */
     printf("a, a+1 and a+2: %x, %x, %x\n", a, a+1, a+2);
     printf("a, *(a+1): %d, %d\n", *a, *(a+1));
+
+    int c = 5; //Variable with value 5
+    int *pc; //Pointer
+    pc = &c; //pc now points to where c is stored
+    printf("The pointer: %x\n", pc);
+    *pc +=1;
+    printf("c has value: %d\n", c); /* Notice here, that we never actually touched c, but by increasing the value stored in the location
+                                    Given by the pointer, we actually implicitly change c, since c is stored in the same mem location always. */
+
+
+}
+
+void swapPointers(int* n1, int* n2)
+{
+    printf("The locations of n1 and n2 before swapping: %x, %x\n", n1, n2);
+    printf("The values of n1 and n2 before swapping: %d, %d\n", *n1, *n2);
+    int* temp;
+    temp = n1;
+    n1 = n2;
+    n2 = temp;
+    printf("The locations of n1 and n2 after swapping: %x, %x\n", n1, n2);
+    printf("The values of n1 and n2 after swapping: %d, %d\n", *n1, *n2);
+
+    //Notice again, that we can swap the pointers, meaning that what they're pointing to has been swapped.
+
 }
 
 
+void funWithMemoryAllocation()
+{
+    /*
+        Recall that arrays are essential allocation of some fixed amount of memory
+        Some times we might need more memory than what we initially allocated. To combat that, we can use malloc to allocate more memory
+        malloc allocates memory at run-time and is known as dynamic memory allocation
+    */
+
+    //Example of memory allocation: malloc reserves a memory block for us. Therefore we must store the result of this in a pointer.
+    int* ptr = malloc(10*sizeof(int)); //Here we reserve 10 extra memory spots for ints. ptr points to the first of it. Just like an array. However, the memory is not initialized.
+    printf("The location of ptr: %x\n", ptr);
+    printf("The location of ptr+1: %x\n", ptr+1);
+    //However, the contents here are not initialized and hence something "random":
+    printf("The content of the location, which ptr points to: %d\n", *ptr);
+   
+    //If we use calloc instead, we initialize everything to 0.
+    int* c_ptr = calloc(10, sizeof(int));
+    printf("The content of the location, which c_ptr points to: %d\n", *c_ptr);
+
+
+    //Now, however, this memory is forever bound. Since we allocate it runtime, the compiler is not able to free memory after we're done using it...
+    //So we must remember to free the memory ourselves, otherwise we can run out...
+    free(ptr); //Free's the memory. It can now be used by other stuff. Lastly we can use realloc, if we dynamically need to allocate even more memory than we first did at runtime...
+
+
+    //A good place where we can use this. If we don't statically know the size of the array we need to store (i.e. user input). We can store the input in a variable
+    //and dynamically allocate the memory later on. Here's a quick example.
+
+    /*
+        We get the size of the array, n. We also initialize a pointer, *array.
+        We then allocate memory for the array dynamically
+        We then scan n times and stores the input in the allocated memory.
+    */
+
+    int n; int* array;
+    printf("Enter size of array: ");
+    scanf("%d", &n);
+    array = malloc(n*sizeof(int));
+
+    for (int i = 0; i<n; i++)
+    {
+        scanf("%d", array + i);
+    }
+    
+    printf("The contens of the array: \n");
+    for (int i = 0; i<n; i++)
+    {
+        printf("%d, ", array[i]);
+    }
+
+    //Dont forget to free the memory afterwards!
+    free(array);
+
+}
+
 int main()
 {
+    int one = 1; int two = 2;
+    int* one_ptr = &one; int* two_ptr = &two;
+
     //funWithMemoryAndArrays();
-    pointersAndMemoryBasics();
+    //pointersAndMemoryBasics();
+    //swapPointers(one_ptr, two_ptr);
+    funWithMemoryAllocation();
     return 0;
 }
