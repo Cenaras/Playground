@@ -5,6 +5,7 @@
     - Insert into function
     - Reverse function
     - Print the linked list
+    https://www.youtube.com/watch?v=VOpjAHCee7c
 */ 
 
 
