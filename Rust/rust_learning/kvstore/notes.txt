@@ -8,3 +8,7 @@ Type check with cargo check. Build with cargo build (type check and create binar
  Note if build as release, folder is not 'debug'. Release build performs compiler optimizations.
  - Cargo.lock describes locked versions of dependencies we use
  - cargo run for build + run...
+
+Everything is immutable by default. 
+Std lib docs: https://doc.rust-lang.org/std/
+Rust book: https://doc.rust-lang.org/book/
