@@ -1,0 +1,10 @@
+Cargo.toml: Manifest file, contains information about our project through metadata. Dependencies and lots of other stuff can be listed in the manifest.
+
+Macros: Has '!' at the end.
+
+
+Type check with cargo check. Build with cargo build (type check and create binary) (cargo build --release for release build)
+ - target contains build artefacts (including binary, located at /target/debug/<project_name>). 
+ Note if build as release, folder is not 'debug'. Release build performs compiler optimizations.
+ - Cargo.lock describes locked versions of dependencies we use
+ - cargo run for build + run...
