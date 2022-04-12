@@ -12,3 +12,9 @@ Type check with cargo check. Build with cargo build (type check and create binar
 Everything is immutable by default. 
 Std lib docs: https://doc.rust-lang.org/std/
 Rust book: https://doc.rust-lang.org/book/
+
+
+After having written the main stuff, create a new file identical and clean up the new file, so one is over commented and another is easy to read.
+
+Ownership can be transfered via returns or putting stuff into datatypes as structs.
+Notice: Dangling pointers are impossible, since when the owner drops the memory, Rust's type system ensures that slices cannot access the destroyed memory
